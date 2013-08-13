@@ -9,15 +9,16 @@ GIT
 
 GIT
   remote: git://github.com/Kovalo/minitest-apidoc.git
-  revision: a63a02ec761557c7a3ff3e2f3b30664c0a54c0bb
+  revision: b06c1c5ec2cec371547adbc8f6f021cb8b7c25a1
   branch: master
   specs:
-    minitest-apidoc (0.0.1)
+    minitest-apidoc (0.1.0)
       minitest-reporters
       mustache
       rack-test
 
 GEM
+  remote: https://rubygems.org/
   specs:
     ansi (1.4.3)
     builder (3.2.2)
