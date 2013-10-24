@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-gem 'krack', :git => 'git://github.com/Kovalo/krack.git', :branch => 'master'
-gem 'minitest-apidoc', :git => 'git://github.com/Kovalo/minitest-apidoc.git', :branch => 'master'
+gem 'krack',            github: 'lauri/krack', branch: 'master'
+gem 'minitest-apidoc',  github: 'lauri/minitest-apidoc', branch: 'master'
 
 group :development do
   gem 'rake'

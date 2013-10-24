@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/Kovalo/krack.git
+  remote: git://github.com/lauri/krack.git
   revision: 3ffee4696c7965ffd28b20d9e332e0e7cb71e70c
   branch: master
   specs:
@@ -8,35 +8,24 @@ GIT
       rack (~> 1.4.5)
 
 GIT
-  remote: git://github.com/Kovalo/minitest-apidoc.git
-  revision: b06c1c5ec2cec371547adbc8f6f021cb8b7c25a1
+  remote: git://github.com/lauri/minitest-apidoc.git
+  revision: 0b46e8c391c734d97c3f450b25f4e706f3c328d5
   branch: master
   specs:
-    minitest-apidoc (0.1.0)
-      minitest-reporters
+    minitest-apidoc (0.2.0)
+      minitest (~> 5.0.0)
       mustache
-      rack-test
+      rack-test (~> 0.6.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    ansi (1.4.3)
-    builder (3.2.2)
-    coderay (1.0.8)
-    hashie (2.0.5)
-    method_source (0.8.1)
-    minitest (4.7.5)
-    minitest-reporters (0.14.20)
-      ansi
-      builder
-      minitest (>= 2.12, < 5.0)
-      powerbar
-    multi_json (1.7.7)
+    coderay (1.0.9)
+    method_source (0.8.2)
+    minitest (5.0.8)
+    multi_json (1.8.2)
     mustache (0.99.4)
-    powerbar (1.0.11)
-      ansi (~> 1.4.0)
-      hashie (>= 1.1.0)
-    pry (0.9.12.1)
+    pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -46,10 +35,10 @@ GEM
     racksh (1.0.0)
       rack (>= 1.0)
       rack-test (>= 0.5)
-    rake (10.0.3)
+    rake (10.1.0)
     shotgun (0.9)
       rack (>= 1.0)
-    slop (3.4.3)
+    slop (3.4.6)
 
 PLATFORMS
   ruby

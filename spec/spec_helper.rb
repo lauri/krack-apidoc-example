@@ -1,16 +1,12 @@
 $: << '.'
-require 'bundler'
-Bundler.require
+require 'bundler/setup'
+require 'krack'
+require 'minitest/apidoc'
 require 'minitest/autorun'
 
 require_relative '../router'
 
 def app; App end
-
-MiniTest::Reporters.use!([
-  MiniTest::Reporters::DefaultReporter.new,
-  MiniTest::Apidoc::Reporter.new
-])
 
 include MiniTest::Apidoc::Methods
 

@@ -277,15 +277,6 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
                   <dt><code>year</code></dt>
                   <dd>Year of release <em>(required)</em></dd>
               </dl>
-                <p><strong>Example:</strong> Failure when some parameters are missing</p>
-                <pre>POST /albums
-name=The+Meters&amp;year=1969</pre>
-                <pre>{
-  &quot;error&quot;: {
-    &quot;status&quot;: 400,
-    &quot;message&quot;: &quot;Bad Request&quot;
-  }
-}</pre>
                 <p><strong>Example:</strong> Successfully creating an album</p>
                 <pre>POST /albums
 name=The+Meters&amp;artist=The+Meters&amp;year=1969</pre>
@@ -295,6 +286,15 @@ name=The+Meters&amp;artist=The+Meters&amp;year=1969</pre>
     &quot;name&quot;: &quot;The Meters&quot;,
     &quot;artist&quot;: &quot;The Meters&quot;,
     &quot;year&quot;: 1969
+  }
+}</pre>
+                <p><strong>Example:</strong> Failure when some parameters are missing</p>
+                <pre>POST /albums
+name=The+Meters&amp;year=1969</pre>
+                <pre>{
+  &quot;error&quot;: {
+    &quot;status&quot;: 400,
+    &quot;message&quot;: &quot;Bad Request&quot;
   }
 }</pre>
             </div>
