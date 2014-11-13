@@ -1,1 +1,1 @@
-Example application demonstrating [krack](https://github.com/Kovalo/krack) and [minitest-apidoc](https://github.com/Kovalo/minitest-apidoc)
+Example application demonstrating [krack](https://github.com/lauri/krack) and [minitest-apidoc](https://github.com/lauri/minitest-apidoc)
