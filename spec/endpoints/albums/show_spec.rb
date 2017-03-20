@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require_relative "../../spec_helper"
 
 document Albums::Show do
 
@@ -7,7 +7,7 @@ document Albums::Show do
   meta :request_path,   "/albums/:id"
   meta :description,    "Returns a single album with the id given in the URL."
 
-  param ":id", "Id of the album", :required => true
+  param ":id", "Id of the album", required: true
 
   example "Successfully requesting an album" do
     get "/albums/1" do |json|

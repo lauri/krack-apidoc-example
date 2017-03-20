@@ -4,324 +4,672 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width">
-    <style type="text/css">
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
-      body {
-        font: 14px/1.4 helvetica, arial;
-        background: #f6f6f6;
-        color: #333;
+    <style>
+      * {
+        box-sizing: border-box;
       }
-      a:link, a:visited {
+      html, body, ul, li {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        background: #fff;
+        color: #222;
+      }
+
+      h1, h2, h3, h4 {
+        margin: 0.5em 0 0.5em 0;
+        font-weight: 700;
+      }
+      h1 { font-size: 26px; margin-top: 0; }
+      h2 { font-size: 20px; }
+      h3 { font-size: 16px; border-bottom: 1px solid #e6e6e6; }
+      h4 { font-size: 14px; }
+
+      a {
         text-decoration: none;
-        color: #07c;
+        border-bottom: 2px solid #e6e6e6;
+        color: #888;
       }
       a:hover {
-        color: #333;
+        color: #222;
       }
-      p {
-        margin: 0.9em 0;
+
+      ul {
+        list-style: inside;
       }
-      strong {
-        font-weight: bold;
-      }
-      em {
-        font-style: italic;
-        color: #999;
-      }
-      pre, code {
-        font: 12px/16px menlo, monaco, courier, monospace;
-        border: 1px solid #e6e6e6;
-        border-radius: 4px;
-        background: #f6f6f6;
-        color: #356;
-      }
-      pre {
+
+      table {
         margin: 1em 0;
-        padding: 0.7em 0.8em;
+        border-collapse: collapse;
       }
-      code {
-        padding: 1px 4px;
+      th {
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #888;
       }
-      dl {
-        overflow: auto;
+      td {
+        vertical-align: top;
+        padding-right: 1rem;
       }
-      dt, dd {
-        float: left;
-        padding-bottom: 0.5em;
+
+      blockquote {
+        margin: 0 0 1em 0;
+        padding: 10px 14px;
+        border-left: 2px solid #e6e6e6;
+        background: #f6f6f6;
       }
-      dt {
-        clear: left;
-      }
-      dd {
-        padding-left: 0.5em;
-      }
-      h1, h2, h3, h4, h5 {
-        margin: 0 0 0.5em 0;
-        font-weight: bold;
-      }
-      h1 {
-        font-size: 24px;
-      }
-      h2 {
-        margin-top: 1em;
-        font-size: 20px;
-      }
-      h3 {
-        margin-top: 0.5em;
-        border-bottom: 2px solid #e6e6e6;
-        font-size: 16px;
-      }
-      h3 .label {
-        padding-top: 3px;
+      blockquote a {
+        float: right;
         font-size: 12px;
       }
+      pre, code {
+        margin: 0;
+        font: 12px/1.4 Menlo, Monaco, Courier, monospace;
+        background: #f6f6f6;
+        color: #444;
+      }
+      pre.headers {
+        display: none;
+        color: #888;
+      }
+      pre.headers.visible {
+        display: block;
+      }
+      code {
+        padding: 2px 3px;
+      }
+
       .label {
+        display: inline-block;
+        width: 55px;
+        border-left-width: 2px;
+        border-left-style: solid;
         padding: 2px 4px;
-        border-radius: 4px;
-        color: #fff;
-        background: #999;
-        font: bold 10px helvetica, arial, sans-serif;
+        font-size: 11px;
+        color: #888;
       }
-      .label.get {
-        background: #4ab948;
+      h3 .label {
+        display: inline;
+        border-left: none;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        font-size: 14px;
+        font-weight: 600;
       }
-      .label.post {
-        background: #d98a48;
+
+      .params strong {
+        margin-left: 0.5em;
+        font-size: 12px;
+        font-weight: normal;
+        text-transform: uppercase;
+        color: #888;
       }
-      .label.put {
-        background: #4a88b9;
-      }
-      .label.delete {
-        background: #b94a48;
-      }
+
+      .head     { border-color: #c1c1c1; }
+      .get      { border-color: #36d484; }
+      .post     { border-color: #32ccf4; }
+      .put      { border-color: #fec541; }
+      .patch    { border-color: #fd9252; }
+      .delete   { border-color: #fc5a7d; }
+      .options  { border-color: #7d6dfb; }
+
       .sidebar {
         position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 240px;
+        min-width: 240px;
+        border-right: 1px solid #e6e6e6;
         padding: 10px 20px;
-        width: 200px;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
-      .sidebar h4 {
-        margin: 0.5em 0 0 0;
+      .content {
+        margin-left: 240px;
+        padding: 10px 20px;
       }
+
       .sidebar ul {
-        margin-bottom: 1em;
+        list-style: none;
       }
       .sidebar li {
         white-space: nowrap;
-        font: 12px/18px menlo, monaco, courier, monospace;
+        font: 12px Menlo, Monaco, Courier, monospace;
+      }
+      .sidebar li a {
+        display: block;
+        border: none;
+        padding: 2px 0;
+        color: #222;
+      }
+      .sidebar li a:hover {
+        color: #888;
       }
       .content {
-        margin-left: 220px;
         padding: 10px 20px;
-        border-left: 1px solid #e6e6e6;
-        background: #fff;
       }
       .endpoint {
-        margin-bottom: 2em;
+        margin-bottom: 3rem;
+      }
+
+      @media screen and (max-width: 735px) {
+        .sidebar {
+          display: none;
+        }
+        .content {
+          margin-left: 0 !important;
+        }
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var sidebar = document.querySelector(".sidebar");
+        var content = document.querySelector(".content");
+        var toggles = document.querySelectorAll(".toggle-headers");
+
+        sidebar.style.width = "auto";
+        content.style.marginLeft = sidebar.scrollWidth + "px";
+
+        for (i = 0; i < toggles.length; i++) {
+          toggles[i].addEventListener("click", function(event) {
+            event.preventDefault();
+            var example = this.parentNode.parentNode;
+            example.querySelector(".request-headers").classList.toggle("visible");
+            example.querySelector(".response-headers").classList.toggle("visible");
+          });
+        }
+      });
+    </script>
   </head>
   <body>
-    <div class="container">
-      <div class="sidebar">
-          <h4>Albums</h4>
-          <ul>
-              <li>
-                <a href="#GET-/albums/:id">
-                  <span class="label get">GET</span>
-                  /albums/:id
-                </a>
-              </li>
-              <li>
-                <a href="#GET-/albums">
-                  <span class="label get">GET</span>
-                  /albums
-                </a>
-              </li>
-              <li>
-                <a href="#POST-/albums">
-                  <span class="label post">POST</span>
-                  /albums
-                </a>
-              </li>
-              <li>
-                <a href="#DELETE-/albums/:id">
-                  <span class="label delete">DELETE</span>
-                  /albums/:id
-                </a>
-              </li>
-          </ul>
-      </div>
-      <div class="content">
-          <h1>minitest-apidoc example</h1>
-  <p>This is an example of the documentation generated by <a href="https://github.com/lauri/minitest-apidoc">minitest-apidoc</a>.</p>
-
-          <h2>Albums</h2>
-            <div class="endpoint">
-              <h3 id="GET-/albums/:id">
-                <span class="label get">GET</span>
-                /albums/:id
-              </h3>
-              <p>Returns a single album with the id given in the URL.</p>
-              <h4>Parameters:</h4>
-              <dl>
-                  <dt><code>:id</code></dt>
-                  <dd>Id of the album <em>(required)</em></dd>
-              </dl>
-                <p><strong>Example:</strong> Successfully requesting an album</p>
-                <pre>GET /albums/1
-</pre>
-                <pre>{
-  &quot;album&quot;: {
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;In a Silent Way&quot;,
-    &quot;artist&quot;: &quot;Miles Davis&quot;,
-    &quot;year&quot;: 1969
-  }
-}</pre>
-                <p><strong>Example:</strong> Failure when album is not found</p>
-                <pre>GET /albums/42
-</pre>
-                <pre>{
-  &quot;error&quot;: {
-    &quot;status&quot;: 404,
-    &quot;message&quot;: &quot;Not Found&quot;
-  }
-}</pre>
-            </div>
-            <div class="endpoint">
-              <h3 id="GET-/albums">
+    <div class="sidebar">
+        <h4>Albums</h4>
+        <ul>
+            <li>
+              <a href="#GET-/albums">
                 <span class="label get">GET</span>
                 /albums
-              </h3>
-              <p>Returns all albums. You can optionally filter by year by supplying the year parameter.</p>
-              <h4>Parameters:</h4>
-              <dl>
-                  <dt><code>year</code></dt>
-                  <dd>If given, only albums from this year will be returned</dd>
-              </dl>
-                <p><strong>Example:</strong> Requesting all albums</p>
-                <pre>GET /albums
-</pre>
-                <pre>{
+              </a>
+            </li>
+            <li>
+              <a href="#GET-/albums/:id">
+                <span class="label get">GET</span>
+                /albums/:id
+              </a>
+            </li>
+            <li>
+              <a href="#POST-/albums">
+                <span class="label post">POST</span>
+                /albums
+              </a>
+            </li>
+            <li>
+              <a href="#PATCH-/albums/:id">
+                <span class="label patch">PATCH</span>
+                /albums/:id
+              </a>
+            </li>
+            <li>
+              <a href="#DELETE-/albums/:id">
+                <span class="label delete">DELETE</span>
+                /albums/:id
+              </a>
+            </li>
+        </ul>
+        <h4>Artists</h4>
+        <ul>
+            <li>
+              <a href="#GET-/artists/list">
+                <span class="label get">GET</span>
+                /artists/list
+              </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>minitest-apidoc example</h1>
+  <p>This is an example of the documentation generated by <a href="https://github.com/lauri/minitest-apidoc">minitest-apidoc</a>.</p>
+
+        <h2>Albums</h2>
+          <div class="endpoint">
+            <h3 id="GET-/albums">
+              <span class="label get">GET</span>
+              /albums
+            </h3>
+            <p>Returns all albums. You can optionally filter or sort the results by passing extra parameters.</p>
+            <h4>Parameters</h4>
+            <table class="params">
+                <tr>
+                  <td>
+                    <code>year</code>
+                  </td>
+                  <td>
+                    If given, only albums from this year will be returned
+                    
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>sort</code>
+                  </td>
+                  <td>
+                    Sorts the results by the given attribute.
+                    <strong>Default: </strong><code>year</code>
+                    
+                  </td>
+                </tr>
+            </table>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Requesting all albums</p>
+                <blockquote class="get">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>GET /albums</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre></pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 481 </pre>
+                  <pre>{
   &quot;albums&quot;: [
     {
       &quot;id&quot;: 1,
       &quot;name&quot;: &quot;In a Silent Way&quot;,
       &quot;artist&quot;: &quot;Miles Davis&quot;,
-      &quot;year&quot;: 1969
+      &quot;year&quot;: 1969,
+      &quot;rating&quot;: 3
     },
     {
       &quot;id&quot;: 2,
       &quot;name&quot;: &quot;Transformer&quot;,
       &quot;artist&quot;: &quot;Lou Reed&quot;,
-      &quot;year&quot;: 1972
+      &quot;year&quot;: 1972,
+      &quot;rating&quot;: 4
     },
     {
       &quot;id&quot;: 3,
       &quot;name&quot;: &quot;Harvest&quot;,
       &quot;artist&quot;: &quot;Neil Young&quot;,
-      &quot;year&quot;: 1972
+      &quot;year&quot;: 1972,
+      &quot;rating&quot;: 4
     },
     {
       &quot;id&quot;: 4,
       &quot;name&quot;: &quot;Off the Wall&quot;,
       &quot;artist&quot;: &quot;Michael Jackson&quot;,
-      &quot;year&quot;: 1979
+      &quot;year&quot;: 1979,
+      &quot;rating&quot;: 4
     },
     {
       &quot;id&quot;: 5,
       &quot;name&quot;: &quot;Unknown Pleasures&quot;,
       &quot;artist&quot;: &quot;Joy Division&quot;,
-      &quot;year&quot;: 1979
+      &quot;year&quot;: 1979,
+      &quot;rating&quot;: 3
     },
     {
       &quot;id&quot;: 6,
       &quot;name&quot;: &quot;Loveless&quot;,
       &quot;artist&quot;: &quot;My Bloody Valentine&quot;,
-      &quot;year&quot;: 1991
+      &quot;year&quot;: 1991,
+      &quot;rating&quot;: 5
     }
   ]
 }</pre>
-                <p><strong>Example:</strong> Requesting all albums from 1979</p>
-                <pre>GET /albums?year=1979
-</pre>
-                <pre>{
+                </blockquote>
+              </div>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Requesting all albums from 1979, sorted by rating</p>
+                <blockquote class="get">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>GET /albums?year=1979&amp;sort=rating</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre></pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 176 </pre>
+                  <pre>{
   &quot;albums&quot;: [
-    {
-      &quot;id&quot;: 4,
-      &quot;name&quot;: &quot;Off the Wall&quot;,
-      &quot;artist&quot;: &quot;Michael Jackson&quot;,
-      &quot;year&quot;: 1979
-    },
     {
       &quot;id&quot;: 5,
       &quot;name&quot;: &quot;Unknown Pleasures&quot;,
       &quot;artist&quot;: &quot;Joy Division&quot;,
-      &quot;year&quot;: 1979
+      &quot;year&quot;: 1979,
+      &quot;rating&quot;: 3
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;name&quot;: &quot;Off the Wall&quot;,
+      &quot;artist&quot;: &quot;Michael Jackson&quot;,
+      &quot;year&quot;: 1979,
+      &quot;rating&quot;: 4
     }
   ]
 }</pre>
-            </div>
-            <div class="endpoint">
-              <h3 id="POST-/albums">
-                <span class="label post">POST</span>
-                /albums
-              </h3>
-              <p>Creates a new album with the given parameters.</p>
-              <h4>Parameters:</h4>
-              <dl>
-                  <dt><code>name</code></dt>
-                  <dd>Name of the album <em>(required)</em></dd>
-                  <dt><code>artist</code></dt>
-                  <dd>Name of the artist <em>(required)</em></dd>
-                  <dt><code>year</code></dt>
-                  <dd>Year of release <em>(required)</em></dd>
-              </dl>
-                <p><strong>Example:</strong> Successfully creating an album</p>
-                <pre>POST /albums
-name=The+Meters&amp;artist=The+Meters&amp;year=1969</pre>
-                <pre>{
+                </blockquote>
+              </div>
+          </div>
+          <div class="endpoint">
+            <h3 id="GET-/albums/:id">
+              <span class="label get">GET</span>
+              /albums/:id
+            </h3>
+            <p>Returns a single album with the id given in the URL.</p>
+            <h4>Parameters</h4>
+            <table class="params">
+                <tr>
+                  <td>
+                    <code>:id</code>
+                  </td>
+                  <td>
+                    Id of the album
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+            </table>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Successfully requesting an album</p>
+                <blockquote class="get">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>GET /albums/1</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre></pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 89 </pre>
+                  <pre>{
+  &quot;album&quot;: {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;In a Silent Way&quot;,
+    &quot;artist&quot;: &quot;Miles Davis&quot;,
+    &quot;year&quot;: 1969,
+    &quot;rating&quot;: 3
+  }
+}</pre>
+                </blockquote>
+              </div>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Failure when album is not found</p>
+                <blockquote class="get">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>GET /albums/42</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre></pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">404 Not Found<br>Content-Type: application/json 
+Content-Length: 46 </pre>
+                  <pre>{
+  &quot;error&quot;: {
+    &quot;status&quot;: 404,
+    &quot;message&quot;: &quot;Not Found&quot;
+  }
+}</pre>
+                </blockquote>
+              </div>
+          </div>
+          <div class="endpoint">
+            <h3 id="POST-/albums">
+              <span class="label post">POST</span>
+              /albums
+            </h3>
+            <p>Creates a new album with the given parameters.</p>
+            <h4>Parameters</h4>
+            <table class="params">
+                <tr>
+                  <td>
+                    <code>name</code>
+                  </td>
+                  <td>
+                    Name of the album
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>artist</code>
+                  </td>
+                  <td>
+                    Name of the artist
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>year</code>
+                  </td>
+                  <td>
+                    Year of release
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>rating</code>
+                  </td>
+                  <td>
+                    Album rating (1-5)
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+            </table>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Successfully creating an album</p>
+                <blockquote class="post">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>POST /albums</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre>name=The+Meters&amp;artist=The+Meters&amp;year=1969&amp;rating=4</pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 83 </pre>
+                  <pre>{
   &quot;album&quot;: {
     &quot;id&quot;: 7,
     &quot;name&quot;: &quot;The Meters&quot;,
     &quot;artist&quot;: &quot;The Meters&quot;,
-    &quot;year&quot;: 1969
+    &quot;year&quot;: 1969,
+    &quot;rating&quot;: 4
   }
 }</pre>
-                <p><strong>Example:</strong> Failure when some parameters are missing</p>
-                <pre>POST /albums
-name=The+Meters&amp;year=1969</pre>
-                <pre>{
+                </blockquote>
+              </div>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Failure when some parameters are missing</p>
+                <blockquote class="post">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>POST /albums</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre>name=The+Meters&amp;year=1969</pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">400 Bad Request<br>Content-Type: application/json 
+Content-Length: 48 </pre>
+                  <pre>{
   &quot;error&quot;: {
     &quot;status&quot;: 400,
     &quot;message&quot;: &quot;Bad Request&quot;
   }
 }</pre>
-            </div>
-            <div class="endpoint">
-              <h3 id="DELETE-/albums/:id">
-                <span class="label delete">DELETE</span>
-                /albums/:id
-              </h3>
-              <p>Deletes the album identified by the id given in the URL.</p>
-              <h4>Parameters:</h4>
-              <dl>
-                  <dt><code>:id</code></dt>
-                  <dd>Id of the album <em>(required)</em></dd>
-              </dl>
-                <p><strong>Example:</strong> Successfully deleting an album</p>
-                <pre>DELETE /albums/1
-</pre>
-                <pre>{
+                </blockquote>
+              </div>
+          </div>
+          <div class="endpoint">
+            <h3 id="PATCH-/albums/:id">
+              <span class="label patch">PATCH</span>
+              /albums/:id
+            </h3>
+            <p>Updates an album with the given parameters.</p>
+            <h4>Parameters</h4>
+            <table class="params">
+                <tr>
+                  <td>
+                    <code>:id</code>
+                  </td>
+                  <td>
+                    Id of the album
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>name</code>
+                  </td>
+                  <td>
+                    Name of the album
+                    
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>artist</code>
+                  </td>
+                  <td>
+                    Name of the artist
+                    
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>year</code>
+                  </td>
+                  <td>
+                    Year of release
+                    
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>rating</code>
+                  </td>
+                  <td>
+                    Album rating (1-5)
+                    
+                    
+                  </td>
+                </tr>
+            </table>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Successfully updating an album</p>
+                <blockquote class="patch">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>PATCH /albums/1</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre>rating=4</pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 89 </pre>
+                  <pre>{
   &quot;album&quot;: {
     &quot;id&quot;: 1,
     &quot;name&quot;: &quot;In a Silent Way&quot;,
     &quot;artist&quot;: &quot;Miles Davis&quot;,
-    &quot;year&quot;: 1969
+    &quot;year&quot;: 1969,
+    &quot;rating&quot;: 4
   }
 }</pre>
-            </div>
-      </div>
+                </blockquote>
+              </div>
+          </div>
+          <div class="endpoint">
+            <h3 id="DELETE-/albums/:id">
+              <span class="label delete">DELETE</span>
+              /albums/:id
+            </h3>
+            <p>Deletes the album identified by the id given in the URL.</p>
+            <h4>Parameters</h4>
+            <table class="params">
+                <tr>
+                  <td>
+                    <code>:id</code>
+                  </td>
+                  <td>
+                    Id of the album
+                    
+                    <strong>Required</strong>
+                  </td>
+                </tr>
+            </table>
+              <div class="example">
+                <h4>Example</h4>
+                <p>Successfully deleting an album</p>
+                <blockquote class="delete">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>DELETE /albums/1</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre></pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 89 </pre>
+                  <pre>{
+  &quot;album&quot;: {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;In a Silent Way&quot;,
+    &quot;artist&quot;: &quot;Miles Davis&quot;,
+    &quot;year&quot;: 1969,
+    &quot;rating&quot;: 3
+  }
+}</pre>
+                </blockquote>
+              </div>
+          </div>
+        <h2>Artists</h2>
+          <div class="endpoint">
+            <h3 id="GET-/artists/list">
+              <span class="label get">GET</span>
+              /artists/list
+            </h3>
+            <p>Returns a list of all artists.</p>
+              <div class="example">
+                <h4>Example</h4>
+                
+                <blockquote class="get">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>GET /artists/list</pre>
+                  <pre class="headers request-headers"></pre>
+                  <pre></pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">200 OK<br>Content-Type: application/json 
+Content-Length: 106 </pre>
+                  <pre>{
+  &quot;artists&quot;: [
+    &quot;Miles Davis&quot;,
+    &quot;Lou Reed&quot;,
+    &quot;Neil Young&quot;,
+    &quot;Michael Jackson&quot;,
+    &quot;Joy Division&quot;,
+    &quot;My Bloody Valentine&quot;
+  ]
+}</pre>
+                </blockquote>
+              </div>
+          </div>
     </div>
   </body>
 </html>

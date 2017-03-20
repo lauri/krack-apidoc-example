@@ -1,6 +1,6 @@
-$: << '.'
-require 'bundler'
+require "bundler"
 Bundler.require
-require 'router'
+
+require_relative "router"
 
 run App

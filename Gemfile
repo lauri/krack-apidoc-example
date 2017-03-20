@@ -1,11 +1,12 @@
 source "https://rubygems.org"
 
-gem 'krack',            github: 'lauri/krack', branch: 'master'
-gem 'minitest-apidoc',  github: 'lauri/minitest-apidoc', branch: 'master'
+gem "krack", github: "lauri/krack"
+gem "minitest-apidoc", github: "lauri/minitest-apidoc"
 
 group :development do
-  gem 'rake'
-  gem 'shotgun'
-  gem 'racksh'
-  gem 'pry'
+  gem "rake"
+  gem "puma"
+  gem "shotgun"
+  gem "racksh"
+  gem "pry"
 end

@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require_relative "../../spec_helper"
 
 document Albums::Destroy do
 
@@ -7,7 +7,7 @@ document Albums::Destroy do
   meta :request_path,   "/albums/:id"
   meta :description,    "Deletes the album identified by the id given in the URL."
 
-  param ":id", "Id of the album", :required => true
+  param ":id", "Id of the album", required: true
 
   example "Successfully deleting an album" do
     delete "/albums/1" do |json|

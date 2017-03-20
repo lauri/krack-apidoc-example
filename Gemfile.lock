@@ -1,20 +1,17 @@
 GIT
   remote: git://github.com/lauri/krack.git
-  revision: 3ffee4696c7965ffd28b20d9e332e0e7cb71e70c
-  branch: master
+  revision: 02ac918a09307697cef40f14964634ab4bb9ead3
   specs:
-    krack (0.1.0)
-      multi_json
-      rack (~> 1.4.5)
+    krack (0.1.2)
+      rack (>= 1.4.5)
 
 GIT
   remote: git://github.com/lauri/minitest-apidoc.git
-  revision: 0b46e8c391c734d97c3f450b25f4e706f3c328d5
-  branch: master
+  revision: 0eb01c63769cf62c5c7b6b3e0ebbde982192872e
   specs:
-    minitest-apidoc (0.2.0)
-      minitest (~> 5.0.0)
-      mustache
+    minitest-apidoc (0.4.0)
+      minitest (>= 5.5.0)
+      mustache (~> 1.0.0)
       rack-test (~> 0.6.0)
 
 GEM
@@ -22,13 +19,13 @@ GEM
   specs:
     coderay (1.0.9)
     method_source (0.8.2)
-    minitest (5.0.8)
-    multi_json (1.8.2)
-    mustache (0.99.4)
+    minitest (5.10.1)
+    mustache (1.0.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    puma (3.7.1)
     rack (1.4.5)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -47,6 +44,10 @@ DEPENDENCIES
   krack!
   minitest-apidoc!
   pry
+  puma
   racksh
   rake
   shotgun
+
+BUNDLED WITH
+   1.13.7
