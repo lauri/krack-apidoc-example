@@ -7,35 +7,33 @@ GIT
 
 GIT
   remote: git://github.com/lauri/minitest-apidoc.git
-  revision: 0eb01c63769cf62c5c7b6b3e0ebbde982192872e
+  revision: b889fe763b0022902eba0770a076ab565aea0a43
   specs:
-    minitest-apidoc (0.4.0)
-      minitest (>= 5.5.0)
+    minitest-apidoc (0.5.0)
+      minitest (>= 5.11.2)
       mustache (~> 1.0.0)
       rack-test (~> 0.6.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    coderay (1.0.9)
-    method_source (0.8.2)
-    minitest (5.10.1)
-    mustache (1.0.3)
-    pry (0.9.12.2)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-    puma (3.7.1)
-    rack (1.4.5)
-    rack-test (0.6.2)
+    coderay (1.1.2)
+    method_source (0.9.0)
+    minitest (5.11.3)
+    mustache (1.0.5)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    puma (3.11.3)
+    rack (2.0.4)
+    rack-test (0.6.3)
       rack (>= 1.0)
     racksh (1.0.0)
       rack (>= 1.0)
       rack-test (>= 0.5)
-    rake (10.1.0)
-    shotgun (0.9)
+    rake (12.3.1)
+    shotgun (0.9.2)
       rack (>= 1.0)
-    slop (3.4.6)
 
 PLATFORMS
   ruby
